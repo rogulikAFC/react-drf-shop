@@ -10,6 +10,8 @@ export const Context = (props) => {
         { id: 4, title: 'ladno 4' }
     ])
 
+    const [inCart, setInCart] = useState([])
+
     const addProduct = (product) => {
         setProducts([
             product, ...products
@@ -17,11 +19,31 @@ export const Context = (props) => {
     }
 
     const removeProduct = (productID) => {
-        let productToRemove = products.filter(
-            product => product.id === productID
-        )
-        setProducts(
-            products.remove(productToRemove)
-        )
+        setProducts(products.filter(product => product.id !== productID))
     }
+
+    const addToCart = (product) => {
+        setInCart([
+            product, ...inCart
+        ])
+    }
+
+    const removeFromCart = (productID) => {
+        setInCart(inCart.filter(product => product.id !== productID))
+    }
+
+    const contextValue = {
+        products,
+        addProduct,
+        removeProduct,
+        inCart,
+        addToCart,
+        removeFromCart
+    }
+
+    return (
+        <ProductsContext.Provider value={contextValue}>
+            {props.children}
+        </ProductsContext.Provider>
+    )
 }
