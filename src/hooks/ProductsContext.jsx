@@ -12,24 +12,40 @@ export const Context = (props) => {
 
     const [inCart, setInCart] = useState([])
 
-    const addProduct = (product) => {
+    const addProduct = product => {
         setProducts([
             product, ...products
         ])
     }
 
-    const removeProduct = (productID) => {
+    const removeProduct = productID => {
         setProducts(products.filter(product => product.id !== productID))
     }
 
-    const addToCart = (product) => {
+    const addToCart = product => {
         setInCart([
             product, ...inCart
         ])
     }
 
-    const removeFromCart = (productID) => {
+    const removeFromCart = productID => {
         setInCart(inCart.filter(product => product.id !== productID))
+    }
+
+    const [countedInCart, setCountedInCart] = useState([])
+
+    const addToCountedInCart = product => {
+        setCountedInCart([...countedInCart, product])
+    }
+
+    const removeFromCountedInCart = productID => {
+        console.log(countedInCart)
+
+        countedInCart.forEach(product => {
+            if (productID === product.id) {
+                product.count -= 1
+            }
+        })      
     }
 
     const contextValue = {
@@ -38,7 +54,11 @@ export const Context = (props) => {
         removeProduct,
         inCart,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        countedInCart,
+        addToCountedInCart,
+        setCountedInCart,
+        removeFromCountedInCart
     }
 
     return (
