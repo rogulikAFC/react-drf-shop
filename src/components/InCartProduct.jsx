@@ -1,19 +1,23 @@
-function InCartProduct({id, title, count}) {
-    // let {remove }
+import { useContext } from "react"
+import { ProductsContext } from "../hooks/ProductsContext"
 
-    // const removeOne = () => {
-    //     removeFromCart(id)
-    //     console.log('product removed')
+function InCartProduct({id, title, price, count}) {
+    let {removeOneProductFromCart} = useContext(ProductsContext)
 
-    //     setChoosenCount(prev => prev - 1)
-    // }
+    let productObj = {
+        id: id,
+        title: title,
+        price: price,
+        count: count
+    }
 
     return (
         <div className="product products__product">
             <h2 className="product__title">{title}</h2>
             <div className="product__interaction">
-                {/* <button className="btn product__btn product__to-cart" onClick={addProductToCart}> To cart </button> */}
                 <span className="product__count"> {count} added </span>
+                <strong className="product__price"> {price*count}$ </strong>
+                <button className="product__remove-one" onClick={() => removeOneProductFromCart(productObj)}> Remove one </button>
             </div>
         </div>
     )

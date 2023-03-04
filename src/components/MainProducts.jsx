@@ -8,7 +8,7 @@ function MainProducts() {
     return (
         <div className={`products main__products`}>
             {products.map(product => (
-                <MainProduct key={product.id} id={product.id} title={product.title} />
+                <MainProduct key={product.id} id={product.id} title={product.title} price={product.price} count={product.count}/>
             ))}
         </div>
     )
