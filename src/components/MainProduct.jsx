@@ -13,11 +13,11 @@ function MainProduct({id, title, price, count}) {
 
     return (
         <div className="product products__product">
+            <strong className="price product__price"> {price} $ </strong>
             <h2 className="product__title">{title}</h2>
             <div className="product__interaction">
-                <button className="btn product__btn product__to-cart" onClick={() => {addOneProductToCart(productObj)}}> To cart </button>
-                <strong className="product__price"> {price}$ </strong>
-                {count <= 0? <strong> Product is over </strong>: null}
+                <span className="product__count"> {count > 0? `${count} available`: 'Product is over'} </span>
+                <button className="btn product__btn btn_dark-green" onClick={() => {addOneProductToCart(productObj)}}> To cart </button>
             </div>
         </div>
     )

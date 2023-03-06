@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'FiraSans-Regular';
+    src: url(./fonts/FiraSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'FiraSans-SemiBold';
+    src: url(./fonts/FiraSans-SemiBold.ttf);
+}
+
+body {
+    font-family: 'FiraSans-Regular';
+    margin: 0 20px;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,48 @@
+.product {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 5px;
+    border: 2px solid #0A1616;
+    border-radius: 30px;
+    padding: 10px;
+    max-width: 200px;
+}
+
+.product__interaction {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 200px;
+
+    margin-top: 10px;
+}
+
+.product__price {
+    font-family: 'FiraSans-SemiBold';
+    color: white;
+    background-color: #80A166;
+    font-size: larger;
+    padding: 5px 8px;
+    border-radius: 30px;
+    max-width: 84px;
+    text-align: center;
+    margin-bottom: 10px;
+
+    align-self: center;
+    max-width: 184px;
+    width: 184px;
+}
+
+.product__title {
+    font-size: large;
+}
+
+.product__count {
+    background-color: #C2DFCD;
+    color: #2D4C3C;
+    padding: 5px 8px;
+    border-radius: 30px;
+    max-width: 200px;
+    text-align: center;
+    margin-bottom: 10px;
+}

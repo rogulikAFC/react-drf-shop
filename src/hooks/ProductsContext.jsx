@@ -4,8 +4,12 @@ export const ProductsContext = createContext()
 
 export const Context = (props) => {
     const [products, setProducts] = useState([
-        {id: 1, title: 'product 1', price: 1983, count: 10},
-        {id: 2, title: 'product 2', price: 198, count: 2}
+        {id: 1, title: 'Krasnodarski tea', price: 1983, count: 10},
+        {id: 2, title: 'Coffee machine Phillips', price: 198, count: 2},
+        {id: 3, title: 'Krasnodarski tea', price: 1983, count: 10},
+        {id: 4, title: 'Coffee machine Phillips', price: 198, count: 2},
+        {id: 5, title: 'Krasnodarski tea', price: 1983, count: 10},
+        {id: 6, title: 'Coffee machine Phillips', price: 198, count: 2},
     ])
 
     const addProduct = product => {
@@ -116,6 +120,19 @@ export const Context = (props) => {
         return false
     }
 
+    let [cartRef, setCartRef] = useState()
+    let [isCartOpen, setIsCartOpen] = useState(false)
+
+    const hideCart = () => {
+        cartRef.current.style.display = 'none'
+        setIsCartOpen(false)
+    }
+
+    const showCart = () => {
+        cartRef.current.style.display = 'grid'
+        setIsCartOpen(true)
+    }
+
     const contextValue = {
         products,
         addProduct,
@@ -124,7 +141,13 @@ export const Context = (props) => {
 
         productsInCart,
         addOneProductToCart,
-        removeOneProductFromCart
+        removeOneProductFromCart,
+
+        setCartRef,
+        hideCart,
+        showCart,
+
+        isCartOpen
     }
 
     return (

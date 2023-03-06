@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+    margin: 10px 0;
+    color: #2D4C3C;
+}
+
+.header__title-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header__title {
+    font-size: xx-large;
+    font-family: 'FiraSans-SemiBold';
+}
+
+.header__subtitle {
+    margin-top: 5px;
+}
+
+.header__btn, .header__title-container {
+    margin-right: auto;
+}
+
+.header__line {
+    color: #2D4C3C;
+}

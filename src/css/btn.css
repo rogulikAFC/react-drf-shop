@@ -1,0 +1,28 @@
+.btn {
+    border-radius: 30px;
+    padding: 5px 10px;
+    border: none;
+    text-align: center;
+    font-family: 'FiraSans-Regular';
+
+    transition: all 1s;
+}
+
+.btn_open-cart>img {
+    width: 30px;
+}
+
+.btn_green {
+    background-color: #80A166;
+    color: white;
+}
+
+.btn_light-green {
+    background-color: #C2DFCD;
+    color: #2D4C3C;
+}
+
+.btn_dark-green {
+    background-color: #2D4C3C;
+    color: white;
+}
