@@ -1,0 +1,13 @@
+.error {
+    background-color: rgba(201, 4, 4, 0.5);
+    color: white;
+    border-radius: 30px;
+    padding: 5px 10px;
+    border: none;
+    text-align: center;
+    font-family: 'FiraSans-Regular';
+}
+
+.in-cart-container__error {
+    margin-left: 15px;
+}

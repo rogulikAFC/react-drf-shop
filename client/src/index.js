@@ -9,6 +9,7 @@ import './css/header.css'
 import './css/product.css'
 import './css/products.css'
 import './css/footer.css'
+import './css/error.css'
 
 import { Context } from "./hooks/ProductsContext"
 

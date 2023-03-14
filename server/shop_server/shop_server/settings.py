@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-5v5$%gkt11=#c49hu+a(6+#&r%p!evl$5_3g-uq5)eo(2&q%dk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'testserver'
+]
 
 
 # Application definition
@@ -39,20 +42,24 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'products',
-
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'django_filters',
+
+    'products',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'products.middleware.ProcessErrorsMiddleware'
 ]
 
 ROOT_URLCONF = 'shop_server.urls'
@@ -134,3 +141,10 @@ MEDIA_URL = 'media/'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKEND': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ]
+}

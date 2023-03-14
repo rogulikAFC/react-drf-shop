@@ -3,6 +3,9 @@ from os import path
 from django.db import models
 from django.dispatch import receiver
 from uuid import uuid4
+# from django.db.models import F
+
+from .errors import NotEnoughAvailableError
 
 
 class Product(models.Model):
@@ -41,12 +44,29 @@ class Product(models.Model):
         sum_of_votes = sum(votes_values)
 
         return round(sum_of_votes / votes_count, 1)
+    
+    def buy(self, count):
+        if self.available < count:
+            raise NotEnoughAvailableError(self.title)
+        
+        self.available -= count
+        self.save()
+
+        return True
+    
+    def __str__(self):
+        return self.title
+
 
 @receiver(models.signals.pre_delete, sender=Product)
 def delete_product_image(sender, instance, **kwargs):
-    image_obj = ProductImage.objects.filter(
-        product=instance
-    )[0]
+    try:
+        image_obj = ProductImage.objects.filter(
+            product=instance
+        )[0]
+    
+    except:
+        return
 
     if not image_obj.image:
         return False
@@ -83,12 +103,19 @@ class Seller(models.Model):
         sum_of_votes = sum(votes_values)
 
         return round(sum_of_votes / votes_count, 1)
+    
+    def __str__(self):
+        return self.title
 
 @receiver(models.signals.pre_delete, sender=Seller)
 def delete_seller_image(sender, instance, **kwargs):
-    image_obj = SellerImage.objects.filter(
-        seller=instance
-    )[0]
+    try:
+        image_obj = SellerImage.objects.filter(
+            seller=instance
+        )[0]
+    
+    except:
+        return
 
     if not image_obj.image:
         return False

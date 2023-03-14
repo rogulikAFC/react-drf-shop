@@ -22,7 +22,10 @@ from products import views as products_views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('api/products', products_views.ProductsList.as_view())
+    path('api/products', products_views.ProductsListCreate.as_view()),
+    path('api/buy_product/<uuid:product_id>/<int:count>', products_views.buy_product),
+    path('api/add_product/<uuid:product_id>/<int:count>', products_views.add_product),
+    path('api/buy_cart', products_views.buy_cart)
 ]
 
 if settings.DEBUG:

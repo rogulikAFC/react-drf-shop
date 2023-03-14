@@ -1,16 +1,25 @@
-import { createContext, useState } from "react"
+import { createContext,  useState } from "react"
 
 export const ProductsContext = createContext()
 
-export const Context = (props) => {
-    const [products, setProducts] = useState([
-        {id: 1, title: 'Krasnodarski tea', price: 1983, count: 10},
-        {id: 2, title: 'Coffee machine Phillips', price: 198, count: 2},
-        {id: 3, title: 'Krasnodarski tea', price: 1983, count: 10},
-        {id: 4, title: 'Coffee machine Phillips', price: 198, count: 2},
-        {id: 5, title: 'Krasnodarski tea', price: 1983, count: 10},
-        {id: 6, title: 'Coffee machine Phillips', price: 198, count: 2},
-    ])
+export const Context = props => {
+    // const getProductsViaApi = async () => {
+    //     const response = await fetch('http://127.0.0.1:8000/api/products')
+    //     const json = await response.json()
+    //     let productsArray = []
+    //     json.forEach(product => {
+    //         productsArray.push({
+    //             id: product.id,
+    //             title: product.title,
+    //             price: product.price,
+    //             rating: product.rating,
+    //             count: product.available,
+    //         })
+    //     })
+    //     return productsArray
+    // }
+
+    const [products, setProducts] = useState([])
 
     const addProduct = product => {
         setProducts([
@@ -26,13 +35,13 @@ export const Context = (props) => {
         })
     }
 
-    const removeOneProduct = productID => {
+    const removeSomeOfProduct = (productID, count) => {
         let isFinded = false
 
         products.forEach(function loop(product) {
             if (product.id === productID) {
-                if (product.count !== 0) {
-                    product.count -= 1
+                if (product.count >= count) {
+                    product.count -= count
 
                     isFinded = true
                     loop.stop = true
@@ -41,6 +50,10 @@ export const Context = (props) => {
         })
 
         return isFinded
+    }
+
+    const removeOneProduct = productID => {
+        return removeSomeOfProduct(productID, 1)
     }
 
     const [productsInCart, setProductsInCart] = useState([])
@@ -133,21 +146,43 @@ export const Context = (props) => {
         setIsCartOpen(true)
     }
 
+    const fetchProducts = async () => {
+        const response = await fetch('http://127.0.0.1:8000/api/products')
+        const json = await response.json()
+        console.log(json)
+        let productsArray = []
+        json.forEach(product => {
+            productsArray.push({
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                rating: product.rating,
+                count: product.available,
+            })
+        })
+        setProducts(productsArray)
+    }
+
     const contextValue = {
         products,
         addProduct,
         addOneProduct,
         removeOneProduct,
+        setProducts,
+        fetchProducts,
 
         productsInCart,
         addOneProductToCart,
         removeOneProductFromCart,
+        setProductsInCart,
 
         setCartRef,
         hideCart,
         showCart,
 
-        isCartOpen
+        isCartOpen,
+        
+        // getProductsViaApi
     }
 
     return (
